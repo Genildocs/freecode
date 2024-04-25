@@ -76,7 +76,7 @@ const allSongs = [
     title: 'Zetsuen No Tempest OP',
     artist: 'Desconhecido',
     duration: '4:19',
-    src: 'https://drive.google.com/file/d/0Bw2Txl-TPdtULUd3VVE0VnVYTGc/view?usp=drive_link&resourcekey=0-r5EFf5Yg-0qqZDEnCgsuQQ',
+    src: 'https://drive.google.com/file/d/0Bw2Txl-TPdtULUd3VVE0VnVYTGc/preview?resourcekey=0-r5EFf5Yg-0qqZDEnCgsuQQ',
   },
 ];
 
