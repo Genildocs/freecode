@@ -1,82 +1,82 @@
-'use strict';
+"use strict";
 
-const playlistSongs = document.getElementById('playlist-songs');
-const playButton = document.getElementById('play');
-const pauseButton = document.getElementById('pause');
-const nextButton = document.getElementById('next');
-const previousButton = document.getElementById('previous');
-const shuffleButton = document.getElementById('shuffle');
+const playlistSongs = document.getElementById("playlist-songs");
+const playButton = document.getElementById("play");
+const pauseButton = document.getElementById("pause");
+const nextButton = document.getElementById("next");
+const previousButton = document.getElementById("previous");
+const shuffleButton = document.getElementById("shuffle");
 
 const allSongs = [
   {
     id: 0,
-    title: 'Scratching The Surface',
-    artist: 'Quincy Larson',
-    duration: '4:25',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/scratching-the-surface.mp3',
+    title: "Scratching The Surface",
+    artist: "Quincy Larson",
+    duration: "4:25",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/scratching-the-surface.mp3",
   },
   {
     id: 1,
     title: "Can't Stay Down",
-    artist: 'Quincy Larson',
-    duration: '4:15',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/cant-stay-down.mp3',
+    artist: "Quincy Larson",
+    duration: "4:15",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/cant-stay-down.mp3",
   },
   {
     id: 2,
-    title: 'Still Learning',
-    artist: 'Quincy Larson',
-    duration: '3:51',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/still-learning.mp3',
+    title: "Still Learning",
+    artist: "Quincy Larson",
+    duration: "3:51",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/still-learning.mp3",
   },
   {
     id: 3,
-    title: 'Cruising for a Musing',
-    artist: 'Quincy Larson',
-    duration: '3:34',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/cruising-for-a-musing.mp3',
+    title: "Cruising for a Musing",
+    artist: "Quincy Larson",
+    duration: "3:34",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/cruising-for-a-musing.mp3",
   },
   {
     id: 4,
-    title: 'Never Not Favored',
-    artist: 'Quincy Larson',
-    duration: '3:35',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/never-not-favored.mp3',
+    title: "Never Not Favored",
+    artist: "Quincy Larson",
+    duration: "3:35",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/never-not-favored.mp3",
   },
   {
     id: 5,
-    title: 'From the Ground Up',
-    artist: 'Quincy Larson',
-    duration: '3:12',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/from-the-ground-up.mp3',
+    title: "From the Ground Up",
+    artist: "Quincy Larson",
+    duration: "3:12",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/from-the-ground-up.mp3",
   },
   {
     id: 6,
-    title: 'Walking on Air',
-    artist: 'Quincy Larson',
-    duration: '3:25',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/walking-on-air.mp3',
+    title: "Walking on Air",
+    artist: "Quincy Larson",
+    duration: "3:25",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/walking-on-air.mp3",
   },
   {
     id: 7,
     title: "Can't Stop Me. Can't Even Slow Me Down.",
-    artist: 'Quincy Larson',
-    duration: '3:52',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/cant-stop-me-cant-even-slow-me-down.mp3',
+    artist: "Quincy Larson",
+    duration: "3:52",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/cant-stop-me-cant-even-slow-me-down.mp3",
   },
   {
     id: 8,
-    title: 'The Surest Way Out is Through',
-    artist: 'Quincy Larson',
-    duration: '3:10',
-    src: 'https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/the-surest-way-out-is-through.mp3',
+    title: "The Surest Way Out is Through",
+    artist: "Quincy Larson",
+    duration: "3:10",
+    src: "https://s3.amazonaws.com/org.freecodecamp.mp3-player-project/the-surest-way-out-is-through.mp3",
   },
   {
     id: 9,
-    title: 'Zetsuen No Tempest OP',
-    artist: 'Desconhecido',
-    duration: '4:19',
-    src: 'https://drive.google.com/file/d/0Bw2Txl-TPdtULUd3VVE0VnVYTGc/preview?resourcekey=0-r5EFf5Yg-0qqZDEnCgsuQQ',
+    title: "Zetsuen No Tempest OP",
+    artist: "Desconhecido",
+    duration: "4:19",
+    src: "./audio/Zetsuen No Tempest OP [Full].mp3",
   },
 ];
 
@@ -100,13 +100,15 @@ const playSong = (id) => {
   }
 
   userData.currentSong = song;
-  playButton.classList.add('playing');
+  playButton.classList.add("playing");
+  highlightCurrentSong();
   audio.play();
 };
 
 const pauseSong = () => {
   userData.songCurrentTime = audio.currentTime;
-  playButton.classList.remove('playing');
+  playButton.classList.remove("playing");
+
   audio.pause();
 };
 
@@ -117,6 +119,29 @@ const playNextSong = () => {
     const currentSongIndex = getCurrentSongIndex();
     const nextSong = userData?.songs[currentSongIndex + 1];
     playSong(nextSong.id);
+  }
+};
+const playPreviousSong = () => {
+  if (userData?.currentSong === null) return;
+  else {
+    const currentSongIndex = getCurrentSongIndex();
+    const previousSong = userData?.songs[currentSongIndex - 1];
+    playSong(previousSong.id);
+  }
+};
+
+const highlightCurrentSong = () => {
+  const playlistSongElements = document.querySelectorAll(".playlist-song");
+  const songToHighlight = document.getElementById(
+    `song-${userData?.currentSong?.id}`
+  );
+
+  playlistSongElements.forEach((songEl) => {
+    songEl.removeAttribute("aria-current");
+  });
+
+  if (songToHighlight) {
+    songToHighlight.setAttribute("aria-current", "true");
   }
 };
 
@@ -136,7 +161,7 @@ const renderSongs = (array) => {
       </li>
     `;
     })
-    .join('');
+    .join("");
 
   playlistSongs.innerHTML = songsHTML;
 };
@@ -145,7 +170,7 @@ const getCurrentSongIndex = () => {
   return userData?.songs.indexOf(userData?.currentSong);
 };
 
-playButton.addEventListener('click', () => {
+playButton.addEventListener("click", () => {
   if (!userData?.currentSong) {
     playSong(userData?.songs[0].id);
   } else {
@@ -153,8 +178,9 @@ playButton.addEventListener('click', () => {
   }
 });
 
-pauseButton.addEventListener('click', pauseSong);
-nextButton.addEventListener('click', playNextSong);
+pauseButton.addEventListener("click", pauseSong);
+nextButton.addEventListener("click", playNextSong);
+previousButton.addEventListener("click", playPreviousSong);
 const sortSongs = () => {
   userData?.songs.sort((a, b) => {
     if (a.title < b.title) return -1;
